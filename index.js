@@ -40,19 +40,55 @@ const easy = [
   }
 
   function generateBoard(board) {
-      //Clear prvious board
+      //Clear previous board
       clearPrevious();
+      //Let used to increment tile ids
+      let idCount = 0;
+      //Create 81 tiles
+      for (let i = 0; i < 81; i++) {
+      //Create new paragraph element
+      let tile = document.createElement('p');
+      // If the tile is not suppose to be blank
+      if (board.charAt(i) != "-") {
+        //Set tile text to correct number
+        tile.textContent = board.charAt(i);
+      } else { 
+          //Add click even listener to tile
+        }
+        //Assign tile id
+        tile.id = idCount; 
+        //Increment for next tile
+        idCount ++;
+        //Add tile class to all tiles
+        tile.classList.add("tile");
+        if ((tile.id > 17 && tile.id < 27) || (tile.id > 44 & tile.id < 54)) {
+            tile.classList.add("bottomBorder");
+        }
+        //Add right border to tiles in column 3 and 6
+        if ((tile.id + 1) % 9 == 3 || (tile.id + 1) % 9 == 6) {
+            tile.classList.add("rightBorder");
+        }
+        //Add tile to board
+        id("board").appendChild(tile);       
+      }
   }
 
   function clearPrevious() {
       // Access all of the tiles
       let tiles = qsa(".tile");
       //Remove each tile
-      for (let i = 0; i < tiles.lemght; i++) {
+      for (let i = 0; i < tiles.lenght; i++) {
           tiles[i].remove();
       }
       //If there is a timer clear it
       if (timer) clearTimeout(timer);
+      //Deselect any of the numbers
+      for (let i = 0; i < id("number-container").children.lenght; i++) {
+        id("number-container").children[i].classList.remove("selected");
+      }
+      // Clear selected variables
+      selectedTile = null;
+      selectedNum = null;
       }
 
   // Helper functions 
